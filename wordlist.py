@@ -242,7 +242,12 @@ def main():
                                         for p in itertools.product(base, repeat=r)
                                     ]
                                 )
+                        
                         elif quant == "?":
+                            # TODO() Error, is not correctly detecting [&]? inside of a word. Example:
+                            # "pass[&]?word" should equal:
+                            # "pass&word" or "password", gets interpretaded as:
+                            # "pass&?word" instead
                             # zero or one
                             rep_options.extend([""] + base)
                         elif quant == "*":
