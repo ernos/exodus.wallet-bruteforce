@@ -181,12 +181,21 @@ def main():
     template = args.template or config.get("template")
 
     if templates:
-        # Generate wordlist for each template
         all_words = set()
-
-        def generate_from_template(
-            self, template: str, max_count: int = 10000
-        ) -> List[str]:
+        for tpl in templates:
+            if tpl:  # Only process non-empty templates
+                wordgen = WordlistGenerator([], template=tpl).generate(max_count=args.max_count)
+                all_words.update(wordgen)
+        for word in list(all_words)[:args.max_count]:
+            print(word)
+    elif template:
+        wordgen = WordlistGenerator([], template=template).generate(max_count=args.max_count)
+        for word in wordgen:
+            print(word)
+    else:
+        wordgen = WordlistGenerator(samples).generate(max_count=args.max_count)
+        for word in wordgen:
+            print(word)
             """
             Expands a template string with bracketed ranges/sets and alternations into all possible combinations.
             Supports [1-5], [%/], [a|b|c], repetition [1-5]{3}, and quantifiers [;]?, [;]*, [;]+.
@@ -281,3 +290,6 @@ def main():
             combos = itertools.product(*options)
             wordlist = ["".join(combo) for combo in combos]
             return wordlist[:max_count]
+
+if __name__ == "__main__":
+    main()
