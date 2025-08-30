@@ -5,13 +5,12 @@ Module for generating password wordlists based on user input and learned pattern
 """
 
 
+from gc import get_count
 import os
 import re
-import sys
 import argparse
 import json
 from typing import List
-
 
 class WordlistGenerator:
     """
@@ -119,6 +118,11 @@ class WordlistGenerator:
                 options.append([part])
         combos = itertools.product(*options)
         wordlist = ["".join(combo) for combo in combos]
+
+        with open("wordlist.txt", "w") as f:
+            for word in wordlist:
+                f.write(word + "\n")
+        
         return wordlist[:max_count]
 
 
@@ -247,7 +251,7 @@ def main():
                             # TODO() Error, is not correctly detecting [&]? inside of a word. Example:
                             # "pass[&]?word" should equal:
                             # "pass&word" or "password", gets interpretaded as:
-                            # "pass&?word" instead
+                            # "pass&?word instead
                             # zero or one
                             rep_options.extend([""] + base)
                         elif quant == "*":
@@ -294,7 +298,7 @@ def main():
                     options.append([part])
             combos = itertools.product(*options)
             wordlist = ["".join(combo) for combo in combos]
-            return wordlist[:max_count]
+            return wordlist[:get_count]
 
 if __name__ == "__main__":
     main()
