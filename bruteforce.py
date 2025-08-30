@@ -25,5 +25,11 @@ class ExodusBruteForcer:
         with open(self.wordlist_path) as f:
             for password in f:
                 password = password.strip()
+                print(f"Trying password: {password}")
                 if self.try_password(password):
+                    print(f"FOUND THE PASSWORD! Password is:\"{password}\"")
                     break  # Stop on first success, or continue for all
+                
+bruteforce = ExodusBruteForcer("wallet/storage.seco", "wordlist.txt")
+
+bruteforce.run()
