@@ -23,6 +23,8 @@ venv/
 # Logs
 *.log
 
+exodus-decode-wallet.py
+
 # Wallets and Sensitive Data
 *.wallet
 *.dat
