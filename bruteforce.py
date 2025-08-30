@@ -30,6 +30,6 @@ class ExodusBruteForcer:
                     print(f"FOUND THE PASSWORD! Password is:\"{password}\"")
                     break  # Stop on first success, or continue for all
                 
-bruteforce = ExodusBruteForcer("wallet/storage.seco", "wordlist.txt")
+bruteforce = ExodusBruteForcer("wallet/seed.seco", "wordlist.txt")
 
 bruteforce.run()

@@ -118,7 +118,7 @@ class WordlistGenerator:
                 options.append([part])
         combos = itertools.product(*options)
         wordlist = ["".join(combo) for combo in combos]
-        
+
         with open("wordlist.txt", "w") as f:
             for word in wordlist:
                 f.write(word + "\n")
