@@ -1,0 +1,6 @@
+* Bug needs fixing, lines 247-251 in wordlist.py:
+    # TODO() Error, is not correctly detecting [&]? inside of a word. Example:
+    # "pass[&]?word" should equal:
+    # "pass&word" or "password", gets interpretaded as:
+    # "pass&?word" instead
+    # zero or one
