@@ -1,0 +1,33 @@
+# .gitignore for Exodus Wallet Password Brute Forcer
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VSCode
+.vscode/
+
+# Jupyter Notebooks
+*.ipynb
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+venv/
+
+# Logs
+*.log
+
+# Wallets and Sensitive Data
+*.wallet
+*.dat
+*.seed
+
+# Misc
+*.bak
+*.swp
