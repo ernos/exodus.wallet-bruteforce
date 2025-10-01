@@ -10,6 +10,8 @@ __pycache__/
 exodus.wallet-password-bruteforcer.code-workspace
 *.workspace
 
+.venv
+
 # Jupyter Notebooks
 *.ipynb
 

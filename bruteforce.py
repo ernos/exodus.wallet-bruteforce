@@ -1,4 +1,5 @@
 #!/bin/python3
+import argparse
 from exoduswalletreader import ExodusWalletReader
 from wordlist import WordlistGenerator
 
@@ -29,7 +30,15 @@ class ExodusBruteForcer:
                 if self.try_password(password):
                     print(f"FOUND THE PASSWORD! Password is:\"{password}\"")
                     break  # Stop on first success, or continue for all
-                
-bruteforce = ExodusBruteForcer("wallet/seed.seco", "wordlist.txt")
 
-bruteforce.run()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Brute-force Exodus wallet passwords using a wordlist.")
+    parser.add_argument("wallet_path", help="Path to the Exodus wallet file (e.g., seed.seco)")
+    parser.add_argument("wordlist_path", help="Path to the wordlist file containing passwords to try")
+    parser.add_argument("--hash_path", help="Optional path to a hash file (not currently used)", default=None)
+
+    args = parser.parse_args()
+
+    bruteforce = ExodusBruteForcer(args.wallet_path, args.wordlist_path, args.hash_path)
+    bruteforce.run()
